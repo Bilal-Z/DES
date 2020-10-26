@@ -1,23 +1,18 @@
 #include <iostream>
 #include <string>
+#include "roundkeys.hpp"
 
 using namespace std;
 
-class roundKeyGenerator{
-	private:
-	int ci;
-	int di;
-	int cipherKey;
-
-	public:
-	roundKeyGenerator(int ck){
-		this->cipherKey = ck;
-		// break into Ci and Di
-	}
-
-	int generateRoundKey(int cipherkey){
-	// Shift Left both Ci and Di
-	// Ci and Di to compression Pbox
-	// return round key
+roundKeyGenerator::roundKeyGenerator(int ck)
+{
+	this->cipherKey = ck;
+	// break into Ci and Di
 }
+
+int roundKeyGenerator::generateRoundKey(int cipherkey, int round){
+		// Shift Left both Ci and Di
+		// Ci and Di to compression Pbox
+		// return round key
+
 };
