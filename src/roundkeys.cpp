@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "roundkeys.hpp"
+#include "utils.hpp"
 
 using namespace std;
 
