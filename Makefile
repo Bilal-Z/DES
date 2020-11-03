@@ -17,7 +17,7 @@ objects = $(addprefix $(OBJDIR)/, main.o feistal.o function.o roundkeys.o utils.
 $(TARGET): $(objects)
 	$(CXX) $(XX) -o $(TARGET) $(objects)
 
-$(OBJDIR)/main.o: $(SRCDIR)/main.cpp $(SRCDIR)/roundkeys.hpp $(SRCDIR)/function.hpp $(SRCDIR)/feistal.hpp $(SRCDIR)/utils.hpp
+$(OBJDIR)/main.o: $(SRCDIR)/main.cpp $(SRCDIR)/roundkeys.hpp $(SRCDIR)/function.hpp $(SRCDIR)/feistal.hpp $(SRCDIR)/utils.hpp | $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 $(OBJDIR)/feistal.o: $(SRCDIR)/feistal.cpp $(SRCDIR)/roundkeys.hpp $(SRCDIR)/function.hpp $(SRCDIR)/feistal.hpp $(SRCDIR)/utils.hpp
@@ -32,6 +32,8 @@ $(OBJDIR)/roundkeys.o: $(SRCDIR)/roundkeys.cpp $(SRCDIR)/roundkeys.hpp $(SRCDIR)
 $(OBJDIR)/utils.o: $(SRCDIR)/utils.cpp $(SRCDIR)/utils.hpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
 clean: 
 	$(RM) $(objects) *~ des
