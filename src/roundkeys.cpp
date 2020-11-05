@@ -33,15 +33,33 @@ roundKeyGenerator::roundKeyGenerator(string key)
 	{
 		Di[i] = cipherKey[i];
 	}
-	cout << "28bit right half, D0: " + string(28, ' ') + Di.to_string() << endl;
+	cout << "28bit right half, D0: " + string(28, ' ') + Di.to_string() << endl << endl;
 	
 	
 }
 
 bitset<48> roundKeyGenerator::generateRoundKey(int round){
-	bitset<48> roundkey;
+	bitset<48> roundKey;
 	// Shift Left both Ci and Di
+	// by number in NumOfLeftShifts array
+	Ci <<= NumOfLeftShifts[round];
+	Di <<= NumOfLeftShifts[round];
+
+	cout << "----------ROUND" << round + 1 << "----------" << endl;
+	cout << "C" << round + 1 << ": " + Ci.to_string() << endl;
+	cout << "D" << round + 1 << ": " + Di.to_string() << endl << endl;
+
+	// concatenate Ci and Di
+	bitset<56> CiDi = bitset<56>(Ci.to_string() + Di.to_string());
+	cout << "C" << round + 1 << "D" << round + 1 << ": " + CiDi.to_string() << endl << endl;
+
 	// Ci and Di to compression Pbox
+	for (auto i = 0; i < 48; i++)
+	{
+		roundKey[47 - i] = CiDi[55 - (PC2[i] - 1)];
+	}
+	cout << "K" << round + 1 << ": " + roundKey.to_string() << endl << endl;
+
 	// return round key
-	return roundkey;
+	return roundKey;
 };

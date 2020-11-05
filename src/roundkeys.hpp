@@ -35,6 +35,10 @@ private:
     44, 49, 39, 56, 34, 53,
     46, 42, 50, 36, 29, 32
   };
+
+  // NumOfLeftShifts array: number of time Ci and Di need
+  // to be left shifted per round
+  const int NumOfLeftShifts[16] = {1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1};
 public:
   roundKeyGenerator(string key);
   bitset<48> generateRoundKey(int round);

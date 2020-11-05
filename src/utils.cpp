@@ -9,10 +9,6 @@
 
 using namespace std;
 
-bool validateInput(long input, int bits)
-{
-  return (int)log2(input) + 1 == bits;
-}
 
 string text2hex(string input)
 {

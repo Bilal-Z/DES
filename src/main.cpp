@@ -18,7 +18,8 @@ int main()
 
   string key = "133457799BBCDFF1";
   
-  roundKeyGenerator gen(key);
+  roundKeyGenerator gen = roundKeyGenerator(key);
+  gen.generateRoundKey(0);
   
   return 0;
 }

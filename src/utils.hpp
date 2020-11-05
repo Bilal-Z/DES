@@ -3,7 +3,7 @@
 #include <string>
 #include <bitset>
 using namespace std;
-bool validateInput(int input, int bits);
+
 string text2hex(string input);
 bitset<64> hex2bin(string input);
 string bin2hex(string input);
