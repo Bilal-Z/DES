@@ -42,8 +42,8 @@ bitset<48> roundKeyGenerator::generateRoundKey(int round){
 	bitset<48> roundKey;
 	// Shift Left both Ci and Di
 	// by number in NumOfLeftShifts array
-	Ci <<= NumOfLeftShifts[round];
-	Di <<= NumOfLeftShifts[round];
+	Ci <<= rotate(NumOfLeftShifts[round]);
+	Di <<= rotate(NumOfLeftShifts[round]);
 
 	cout << "----------ROUND" << round + 1 << "----------" << endl;
 	cout << "C" << round + 1 << ": " + Ci.to_string() << endl;
@@ -57,7 +57,9 @@ bitset<48> roundKeyGenerator::generateRoundKey(int round){
 	for (auto i = 0; i < 48; i++)
 	{
 		roundKey[47 - i] = CiDi[55 - (PC2[i] - 1)];
+		cout << roundKey[47-i];
 	}
+	cout << endl;
 	cout << "K" << round + 1 << ": " + roundKey.to_string() << endl << endl;
 
 	// return round key

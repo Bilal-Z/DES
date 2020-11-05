@@ -20,6 +20,7 @@ int main()
   
   roundKeyGenerator gen = roundKeyGenerator(key);
   gen.generateRoundKey(0);
+  gen.generateRoundKey(1);
   
   return 0;
 }
