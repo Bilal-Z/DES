@@ -25,7 +25,7 @@ roundKeyGenerator::roundKeyGenerator(string key)
 	// break into Ci and Di
 	for (auto i = 55; i >= 28; i--)
 	{
-		Ci[i-28] = cipherKey[i];
+		Ci[i - 28] = cipherKey[i];
 	}
 	cout << "28bit left half, C0:  " + Ci.to_string() << endl;
 	

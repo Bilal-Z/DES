@@ -13,6 +13,7 @@ roundFunction::roundFunction(){
 
 bitset<32> roundFunction::function(bitset<32> RiMinusOne, bitset<48> ki)
 {
+	cout << "----------ROUND FUNCTION----------" << endl;
 	bitset<32> output;
 	// expand Ri-1 to 48bits using E(expand Pbox)
 	bitset<48> expandedR;
@@ -52,12 +53,13 @@ bitset<32> roundFunction::function(bitset<32> RiMinusOne, bitset<48> ki)
 		output[k--] = outputBits[0];
 	}
 	
+	cout << "after passing Sboxes: " + output.to_string() << endl;
 	// pass through straight Pbox
 	bitset<32> temp = output;
 	for (auto i = 0; i < 32; i++)
 	{
 		output[31 - i] = temp[31 - (P[i] - 1)];
 	}
-
+	cout << "after straight permutation: " + output.to_string() << endl << endl;
 	return output;
 }

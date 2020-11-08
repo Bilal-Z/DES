@@ -15,12 +15,17 @@ using namespace std;
 int main()
 {
   string plaintext[] = {"absolute", "abstract", "academic", "accepted", "accident", "accuracy", "accurate", "achieved"};
+  string cipherText;
 
-  string key = "133457799BBCDFF1";
+  string testCase1Key = "133457799BBCDFF1";
+  string testCase1PlainText = "0123456789ABCDEF";
+  string testCase1CipherText = "85E813540F0AB405";
   
-  roundKeyGenerator gen = roundKeyGenerator(key);
-  gen.generateRoundKey(0);
-  gen.generateRoundKey(1);
-  
+  DES blockCipher = DES();
+  blockCipher.inputKey(testCase1Key);
+
+  cout << "plain text: " + testCase1PlainText << endl << endl;
+  cipherText = blockCipher.encrypt(testCase1PlainText);
+  cout << "cipher text: " + cipherText << endl << endl;
   return 0;
 }
