@@ -76,3 +76,61 @@ string DES::encrypt(string plaintext){
 
 	return bin2hex(CT.to_string());
 }
+
+// -----------------Decryption----------------------------
+void DES::decryptRound(int round){
+	bitset<32> LiMinusOne = Li;
+	bitset<32> RiMinusOne = Ri;
+	Li = RiMinusOne;
+	Ri = LiMinusOne ^ f.function(RiMinusOne, roundKeys[15 - round]);
+	cout << "L" << round + 1 << ": " + Li.to_string() << endl;
+	cout << "R" << round + 1 << ": " + Ri.to_string() << endl<<endl;
+}
+
+
+string DES::decrypt(string ciphertext){
+	cout << "----------DECRYPTION----------" << endl;
+	bitset<64> CT = hex2bin(ciphertext);
+	cout << "64bit ciphertext:          " + CT.to_string() << endl;
+	bitset<64> CT_IP;
+	// initial permutation through IP
+	for (size_t i = 0; i < 64; i++)
+	{
+		CT_IP[63 - i] = CT[63 - (IP[i] - 1)];
+	}
+	cout << "64bit ciphertext after IP: " + CT_IP.to_string() << endl;
+
+	// break into Li and Di
+	for (auto i = 63; i >= 32; i--)
+	{
+		Li[i - 32] = CT_IP[i];
+	}
+	cout << "32bit left half, L0:      " + Li.to_string() << endl;
+	
+	for (auto i = 31; i >= 0; i--)
+	{
+		Ri[i] = CT_IP[i];
+	}
+	cout << "32bit right half, R0:     " + string(32, ' ') + Ri.to_string() << endl << endl;
+
+	// 16 rounds
+	for (auto i = 0; i < NUM_ROUNDS; i++)
+	{
+		decryptRound(i);
+	}
+	
+	// reverse order make R16L16
+	bitset<64> R16L16(Ri.to_string() + Li.to_string());
+	cout << "R16L16: " + R16L16.to_string() << endl << endl;
+
+	// apply inverse of initial permutation
+	bitset<64> PT;
+	for (size_t i = 0; i < 64; i++)
+	{
+		PT[63 - i] = R16L16[63 - (IPinverse[i] - 1)];
+	}
+	
+	cout << "after inverse initial permutation: " + PT.to_string() << endl << endl;
+
+	return bin2hex(PT.to_string());
+}
