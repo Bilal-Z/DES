@@ -14,8 +14,27 @@ using namespace std;
 
 int main()
 {
-  string plaintexts[] = {"absolute", "abstract", "academic", "accepted", "accident", "accuracy", "accurate", "achieved"};
+  // Scope: Generate random keys, and generate cipher texts for 10 plain texts messages.
+  string cipherKey = "908567A3F43B11CC";
+  string plaintexts[10] = {"absolute", "abstract", "academic", "accepted", "accident", "accuracy", "accurate", "achieved", "acquired", "activity"};
+  string ciphertexts[10];
+  string decryptedPlaintexts[10];
 
+  DES blockCipher = DES();
+  blockCipher.inputKey(cipherKey);
+  for (auto i = 0; i < 10; i++)
+  {
+    ciphertexts[i] = blockCipher.encrypt(text2hex(plaintexts[i]));
+    decryptedPlaintexts[i] = hex2text(blockCipher.decrypt(ciphertexts[i]));
+  }
+
+  for (auto i = 0; i < 10; i++)
+  {
+    cout << "Plaintext: " + plaintexts[i] + "\tCiphertext: " + ciphertexts[i] + "\tDecrypted Plaintext: " + decryptedPlaintexts[i] << endl;
+  }
+  cout << endl;
+  
+  
   // TEST CASE 1
   // The DES Algorithm Illustrated
   // Lecture 17
@@ -26,16 +45,16 @@ int main()
   string testCase1PlainText = "0123456789ABCDEF";
   string testCase1CipherText = "85E813540F0AB405";
   
-  DES blockCipher = DES();
+  
   blockCipher.inputKey(testCase1Key);
 
   cipherText = blockCipher.encrypt(testCase1PlainText);
   pt = blockCipher.decrypt(cipherText);
 
   cout << "TEST CASE 1 - plain text: " + testCase1PlainText << endl << endl;
-  cout << "TEST CASE 1 - calculated cipher text: " + cipherText << endl << endl;
+  cout << "TEST CASE 1 - encrypted cipher text: " + cipherText << endl << endl;
   cout << "TEST CASE 1 - expecteed cipher text: " + cipherText << endl << endl;
-  cout << "TEST CASE 1 - calculated plain text: " + pt << endl << endl;
+  cout << "TEST CASE 1 - decrypted plain text: " + pt << endl << endl;
 
   // TEST CASE 2
   // MAINTENANCE TESTING FOR THE DATAENCRYPTION STANDARD
@@ -59,6 +78,8 @@ int main()
     key = output;
   }
   cout << "TEST CASE 2 - calculated last cipher: " + output << endl << endl;
+
+
 
   return 0;
 }
