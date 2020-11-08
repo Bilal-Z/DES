@@ -40,7 +40,7 @@ int main()
   // Lecture 17
 
   string cipherText;
-  string pt;
+  string plaintext;
   string testCase1Key = "133457799BBCDFF1";
   string testCase1PlainText = "0123456789ABCDEF";
   string testCase1CipherText = "85E813540F0AB405";
@@ -49,12 +49,12 @@ int main()
   blockCipher.inputKey(testCase1Key);
 
   cipherText = blockCipher.encrypt(testCase1PlainText);
-  pt = blockCipher.decrypt(cipherText);
+  plaintext = blockCipher.decrypt(cipherText);
 
   cout << "TEST CASE 1 - plain text: " + testCase1PlainText << endl << endl;
   cout << "TEST CASE 1 - encrypted cipher text: " + cipherText << endl << endl;
-  cout << "TEST CASE 1 - expecteed cipher text: " + cipherText << endl << endl;
-  cout << "TEST CASE 1 - decrypted plain text: " + pt << endl << endl;
+  cout << "TEST CASE 1 - expecteed cipher text: " + testCase1CipherText << endl << endl;
+  cout << "TEST CASE 1 - decrypted plain text: " + plaintext << endl << endl;
 
   // TEST CASE 2
   // MAINTENANCE TESTING FOR THE DATAENCRYPTION STANDARD
