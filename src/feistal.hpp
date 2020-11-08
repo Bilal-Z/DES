@@ -17,7 +17,7 @@ class DES {
 		roundFunction f;
 		bitset<48> roundKeys[NUM_ROUNDS];
 		// initial permutation Pbox
-		int IP[64] = {
+		const int IP[64] = {
 			58, 50, 42, 34, 26, 18, 10, 2,
 			60, 52, 44, 36, 28, 20, 12, 4,
 			62, 54, 46, 38, 30, 22, 14, 6,
@@ -28,7 +28,7 @@ class DES {
 			63, 55, 47, 39, 31, 23, 15, 7
 		};
 		// inverse of initial permutation
-		int IPinverse[64] = {  
+		const int IPinverse[64] = {  
 			40, 8, 48, 16, 56, 24, 64, 32,
 			39, 7, 47, 15, 55, 23, 63, 31,
 			38, 6, 46, 14, 54, 22, 62, 30,
